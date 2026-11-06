@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Üniversite Not Hesaplayıcısı</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div class="background-decor">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+  </div>
+
+  <div class="container">
+    <header class="hero-header">
+      <h1 class="welcome-title">Not Hesaplama Sitenize Hoşgeldiniz!</h1>
+      <p class="subtitle">♡♡♡</p>
+    </header>
+
+    <main class="calculator-card">
+      <form id="calcForm" onsubmit="event.preventDefault(); calculate();">
+        
+        <!-- Vize / Ara Sınav Notu -->
+        <div class="input-group">
+          <label for="vize">Vize / Ara Sınav Notu <span class="required">*</span></label>
+          <div class="custom-input-wrapper">
+            <input type="number" id="vize" min="0" max="100" step="0.01" placeholder="Örn: 75" required>
+            <span class="input-pattern"></span>
+          </div>
+          <small class="hint">0 – 100 arasında bir değer giriniz.</small>
+        </div>
+
+        <!-- Yıl İçi Çalışma Puanı -->
+        <div class="input-group">
+          <label for="yilIci">Yıl İçi Çalışma Puanı <span class="optional">(Opsiyonel)</span></label>
+          <div class="custom-input-wrapper">
+            <input type="number" id="yilIci" min="0" max="100" step="0.01" placeholder="Boş bırakılırsa vize notu alınır">
+            <span class="input-pattern"></span>
+          </div>
+          <small class="hint">Ödev, lab veya quiz ortalaması. Boş bırakılırsa Vize notu esas alınır.</small>
+        </div>
+
+        <!-- Final Sınav Notu -->
+        <div class="input-group" id="finalGroup">
+          <label for="final">Final Sınav Notu <span class="required">*</span></label>
+          <div class="custom-input-wrapper">
+            <input type="number" id="final" min="0" max="100" step="0.01" placeholder="Örn: 65">
+            <span class="input-pattern"></span>
+          </div>
+          <small class="hint" id="finalHint">0 – 100 arasında bir değer giriniz.</small>
+        </div>
+
+        <!-- Bütünleme Sınavı Notu -->
+        <div class="input-group">
+          <label for="but">Bütünleme Sınavı Notu <span class="optional">(Opsiyonel)</span></label>
+          <div class="custom-input-wrapper">
+            <input type="number" id="but" min="0" max="100" step="0.01" placeholder="Girilirse Final yerine geçer">
+            <span class="input-pattern"></span>
+          </div>
+          <small class="hint">Bütünleme notu girildiğinde Final yerine geçer.</small>
+        </div>
+
+        <!-- Onay Kutuları -->
+        <div class="checkbox-container">
+          <label class="custom-checkbox">
+            <input type="checkbox" id="devamsiz">
+            <span class="checkmark"></span>
+            <span class="checkbox-label">Devamsızım (F1)</span>
+          </label>
+
+          <label class="custom-checkbox">
+            <input type="checkbox" id="sinavaGirdi" checked>
+            <span class="checkmark"></span>
+            <span class="checkbox-label">Genel / Bütünleme Sınavına Girdim</span>
+          </label>
+        </div>
+
+        <!-- Hata Bildirimi -->
+        <div id="errorMessage" class="error-box hidden"></div>
+
+        <!-- Alt Butonlar -->
+        <div class="button-group">
+          <button type="button" class="btn btn-secondary" onclick="resetForm()">Temizle</button>
+          <button type="submit" class="btn btn-primary">Hesapla</button>
+        </div>
+
+      </form>
+    </main>
+
+    <!-- Sonuç Kartı -->
+    <section id="resultCard" class="result-card hidden">
+      <div class="result-header">
+        <div class="badge" id="statusBadge">GEÇTİ</div>
+        <h3>Hesaplama Sonucu</h3>
+      </div>
+      
+      <div class="result-grid">
+        <div class="result-item">
+          <span class="result-label">Başarı Notu</span>
+          <span class="result-value" id="basariNotuVal">0.00</span>
+        </div>
+        <div class="result-item">
+          <span class="result-label">Harf Notu</span>
+          <span class="result-value" id="harfNotuVal">-</span>
+        </div>
+        <div class="result-item">
+          <span class="result-label">Katsayı</span>
+          <span class="result-value" id="katsayiVal">0.00</span>
+        </div>
+      </div>
+
+      <div class="result-description">
+        <strong>Açıklama:</strong> <span id="aciklamaVal">-</span>
+      </div>
+    </section>
+  </div>
+
+  <script src="kod.js"></script>
+</body>
+</html>
